@@ -2,15 +2,32 @@
 // The service's job is to abstract business logic,
 // it is used by user controller to handle user related requests
 
-import { IUser } from "./user.interface";
+import AppError from "../../errorHelpers/AppError";
+import { IAuth, IUser } from "./user.interface";
 import { User } from "./user.model";
+import bcrypt from "bcryptjs";
 
 const createUser = async (payload: Partial<IUser>) => {
-  const { name, email } = payload;
+  const { email, password, ...rest } = payload;
+
+  const isUserExists = await User.findOne({ email });
+  if (isUserExists) {
+    throw new AppError("User already exists with this email", 400);
+  }
+
+  let hashedPassword;
+  if (password) hashedPassword = await bcrypt.hash(password as string, 10);
+
+  const authProvider: IAuth = {
+    provider: "credentials",
+    providerId: email as string,
+  };
 
   const user = await User.create({
-    name,
     email,
+    password: hashedPassword,
+    auths: [authProvider],
+    ...rest,
   });
 
   if (!user) {
@@ -27,7 +44,7 @@ const getAllUsers = async () => {
     throw new Error("No users found");
   }
   const totalUsers = await User.countDocuments();
-  
+
   return {
     data: users,
     meta: {
