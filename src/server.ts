@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import app from "./app";
 import { Server } from "http";
 import { envVar } from "./app/config/env.config";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
 let server: Server;
 
@@ -24,7 +25,10 @@ const startServer = async () => {
     process.exit(1); // Exit the process with a failure code
   }
 };
-startServer();
+(async () => {
+  await startServer();
+  await seedSuperAdmin();
+})();
 
 // Handle unhandled promise rejections and uncaught exceptions
 // This is important for production applications to avoid crashes
