@@ -8,9 +8,7 @@ export const validateRequest =
       // re-assigning Zod validated data to req.body
       // This is necessary to ensure that the data is validated before it reaches the controller
       // and to avoid any type errors in TypeScript.
-      console.log("Before Validation",req.body)
       req.body = await zodSchema.parseAsync(req.body);
-      console.log("After validation",req.body)
       next();
     } catch (error) {
       next(error);
