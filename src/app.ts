@@ -15,6 +15,7 @@ const app = express();
 
 app.use(cookieParser())
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))// for handling form data
 app.use(cors());
 
 app.use(expressSession({

@@ -36,10 +36,10 @@ const credentialsLogin = catchAsync(
     // });
 
     passport.authenticate("local", async (err: any, user: any, info: any) => {
-      console.log(err, user, info)
+      console.log(err, user, info);
       if (err) return next(err);
       if (!user) return next(new AppError(info.message, 401));
-      const userToken =  createUserToken(user);
+      const userToken = createUserToken(user);
       setAuthCookie(res, userToken);
 
       const userObject = user.toObject();
@@ -104,7 +104,7 @@ const logout = catchAsync(
     });
   }
 );
-const resetPassword = catchAsync(
+const changePassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const newPassword = req.body.newPassword;
     const oldPassword = req.body.oldPassword;
@@ -121,6 +121,52 @@ const resetPassword = catchAsync(
     });
   }
 );
+const resetPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    const {newPassword, id} = req.body;
+    const decodedToken = req.user as JwtPayload;
+    
+    // console.log(newPassword, oldPassword, decodedToken)
+    await AuthServices.resetPassword(newPassword, id, decodedToken);
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Password reset successfull",
+      data: null,
+    });
+  }
+);
+const setPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    const { password } = req.body;
+    const decodedToken = req.user as JwtPayload;
+
+    // console.log(newPassword, oldPassword, decodedToken)
+    await AuthServices.setPassword(decodedToken.userId, password);
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Password reset successfull",
+      data: null,
+    });
+  }
+);
+const forgotPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    const { email } = req.body;
+    await AuthServices.forgotPassword(email);
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Email send successfull",
+      data: null,
+    });
+  }
+);
+
 const googleCallbackController = catchAsync(
   async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     let redirectTo = req.query.state ? (req.query.state as string) : "";
@@ -143,6 +189,9 @@ export const AuthControllers = {
   credentialsLogin,
   getNewAccessToken,
   logout,
+  changePassword,
   resetPassword,
+  setPassword,
+  forgotPassword,
   googleCallbackController,
 };

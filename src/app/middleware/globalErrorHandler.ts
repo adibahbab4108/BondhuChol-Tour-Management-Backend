@@ -4,6 +4,7 @@
 import { NextFunction, Request, Response } from "express";
 import { envVar } from "../config/env.config";
 import mongoose from "mongoose";
+import { deleteImageFromCloudinary } from "../config/cloudinary.config";
 
 const handleDuplicateError = (err: any) => {
   const match = err.message.match(/"([^"]+)"/);
@@ -17,7 +18,7 @@ const handleDuplicateError = (err: any) => {
 const handleCastError = (err: mongoose.Error.CastError) => {
   return {
     statusCode: 400,
-    message: "Invalid MOngoDB ObjectId. Please provide a valid ID",
+    message: "Invalid MongoDB ObjectId. Please provide a valid ID",
   };
 };
 
@@ -53,7 +54,7 @@ const handleZodError = (err: any) => {
     errorSources,
   };
 };
-export const globalErrorHandler = (
+export const globalErrorHandler = async (
   err: any,
   req: Request,
   res: Response,
@@ -62,6 +63,14 @@ export const globalErrorHandler = (
   if (envVar.NODE_ENV === "development") {
     console.log(err);
   }
+  if (req.file) {
+    await deleteImageFromCloudinary(req.file.path);
+  }
+  if (Array.isArray(req.files) && req.files.length > 0) {
+    const imageUrls = req.files as Express.Multer.File[];
+    await Promise.all(imageUrls.map(url => deleteImageFromCloudinary(url.path)));
+  }
+  
   let message = err.message || "Internal Server Error";
   let statusCode = 500;
   let errorSources: any = [];

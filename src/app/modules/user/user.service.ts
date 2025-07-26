@@ -105,9 +105,28 @@ const getAllUsers = async () => {
     },
   };
 };
+const getSingleUser = async (userId: string) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("No users found");
+  }
+
+  return {
+    data: user,
+  };
+};
+
+const getMe = async (userId: string) => {
+  const user = await User.findById(userId);
+
+  return { data: user };
+};
 
 export const userService = {
   createUser,
   updateUser,
   getAllUsers,
+  getSingleUser,
+  getMe,
 };

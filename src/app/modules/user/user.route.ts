@@ -6,7 +6,6 @@ import { checkAuth } from "../../middleware/checkAuth";
 import { Role } from "./user.interface";
 const UserRoutes = Router();
 
-
 // /api/v1/users/register"
 UserRoutes.post(
   "/register",
@@ -14,11 +13,22 @@ UserRoutes.post(
   userController.createUser
 );
 // /api/v1/users/:id"
-UserRoutes.patch("/:id",validateRequest(updateUserZodSchema),checkAuth(...Object.values(Role)), userController.updateUser)
 UserRoutes.get(
   "/all-users",
   checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
   userController.getAllUsers
+);
+UserRoutes.get("/me", checkAuth(...Object.values(Role)), userController.getMe);
+UserRoutes.get(
+  "/:id",
+  checkAuth(...Object.values(Role)),
+  userController.getSingleUser
+);
+UserRoutes.patch(
+  "/:id",
+  validateRequest(updateUserZodSchema),
+  checkAuth(...Object.values(Role)),
+  userController.updateUser
 );
 
 export default UserRoutes;

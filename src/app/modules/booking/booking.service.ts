@@ -1,4 +1,5 @@
 import AppError from "../../errorHelpers/AppError";
+import { getTransactionId } from "../../utils/getTransactionId";
 import { PAYMENT_STATUS } from "../payment/payment.interface";
 import { Payment } from "../payment/payment.model";
 import { ISSLCommerz } from "../sslCommerz/sslCommerz.interface";
@@ -7,10 +8,6 @@ import { Tour } from "../tour/tour.model";
 import { User } from "../user/user.model";
 import { BOOKING_STATUS, IBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
-
-const getTransactionId = () => {
-  return `tran_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-};
 
 /**
  * Duplicate DB Collections / replica

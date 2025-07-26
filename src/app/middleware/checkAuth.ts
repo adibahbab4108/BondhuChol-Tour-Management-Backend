@@ -34,6 +34,9 @@ export const checkAuth =
       ) {
         throw new AppError(`User is ${isUserExist.isActive}`, 404);
       }
+      if(!isUserExist.isVerified){
+        throw new AppError("User is not verified", 404);
+      }
       if (isUserExist.isDeleted) {
         throw new AppError("User is deleted", 404);
       }

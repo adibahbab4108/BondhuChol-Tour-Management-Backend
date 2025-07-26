@@ -7,7 +7,7 @@ import {
 } from "passport-google-oauth20";
 import { envVar } from "./env.config";
 import { User } from "../modules/user/user.model";
-import { Role } from "../modules/user/user.interface";
+import { isActive, Role } from "../modules/user/user.interface";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 
@@ -23,6 +23,22 @@ passport.use(
 
         if (!isUserExist) {
           return done(null, false, { message: "User not found" });
+        }
+
+        if (!isUserExist.isVerified) {
+          // throw new AppError("User is not verified", 404);
+          return done(`User is not verified`);
+        }
+        if (
+          isUserExist.isActive === isActive.BLOCKED ||
+          isUserExist.isActive === isActive.INACTIVE
+        ) {
+          // throw new AppError(`User is ${isUserExist.isActive}`, 404);
+          return done(`User is ${isUserExist.isActive}`);
+        }
+        if (isUserExist.isDeleted) {
+          // throw new AppError("User is deleted", 404);
+          return done(`User is deleted`);
         }
 
         const isGoogleAuthenticated = isUserExist.auths.some(
@@ -74,9 +90,27 @@ passport.use(
           return done(null, false, { message: "no email found" });
         }
 
-        let user = await User.findOne({ email });
-        if (!user) {
-          user = await User.create({
+        let isUserExist = await User.findOne({ email });
+
+        if (isUserExist && !isUserExist.isVerified) {
+          // throw new AppError("User is not verified", 404);
+          return done(`User is not verified`);
+        }
+        if (
+          isUserExist &&
+          (isUserExist.isActive === isActive.BLOCKED ||
+            isUserExist.isActive === isActive.INACTIVE)
+        ) {
+          // throw new AppError(`User is ${isUserExist.isActive}`, 404);
+          return done(`User is ${isUserExist.isActive}`);
+        }
+        if (isUserExist && isUserExist.isDeleted) {
+          // throw new AppError("User is deleted", 404);
+          return done(`User is deleted`);
+        }
+
+        if (!isUserExist) {
+          isUserExist = await User.create({
             email,
             name: profile.displayName,
             picture: profile.photos?.[0].value,
@@ -90,7 +124,7 @@ passport.use(
             ],
           });
         }
-        return done(null, user, { message: "user created successfull" });
+        return done(null, isUserExist, { message: "user created successfull" });
       } catch (error) {
         console.log(error);
         return done(null, false, { message: "error creating user" });
@@ -99,15 +133,15 @@ passport.use(
   )
 );
 passport.serializeUser((user: any, done: (err: any, id?: unknown) => void) => {
-  done(null, user._id);
+  return done(null, user._id);
 });
 passport.deserializeUser(async (id: string, done: any) => {
   try {
     const user = await User.findById(id);
-    done(null, user);
+    return done(null, user);
   } catch (error) {
     console.log(error);
-    done(error);
+    return done(error);
   }
 });
 
