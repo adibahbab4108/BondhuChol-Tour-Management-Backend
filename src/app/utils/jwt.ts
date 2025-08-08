@@ -1,4 +1,5 @@
 import Jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
+
 export const generateToken = (payload:JwtPayload, secret:string, expiresIn:string): string => {
   const token = Jwt.sign(payload, secret, { expiresIn } as SignOptions);
   return token;

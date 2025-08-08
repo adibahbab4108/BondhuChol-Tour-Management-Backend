@@ -7,11 +7,11 @@ import { User } from "../user/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { envVar } from "../../config/env.config";
-import { IAuth, isActive } from "../user/user.interface";
+import { IAuth, isActive, IUser } from "../user/user.interface";
 import { sendEmail } from "../../utils/sendEmail";
 
-//we handouver this to passport.js
-// const credentialsLogin = async (payload: Partial<IUser>) => {
+//___We have handed it over to passport.js...
+const credentialsLogin = async (payload: Partial<IUser>) => {
 //   const { email, password } = payload;
 
 //   const isUserExist = await User.findOne({ email }).select("+password");
@@ -61,7 +61,7 @@ import { sendEmail } from "../../utils/sendEmail";
 //     refreshToken: userToken.refreshToken,
 //     user: userObject,
 //   };
-// };
+};
 
 const getNewAccessToken = async (refreshToken: string) => {
   const newAccessToken = await createNewAccessTokenWithRefreshToken(

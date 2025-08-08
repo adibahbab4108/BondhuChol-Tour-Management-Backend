@@ -22,10 +22,9 @@ AuthRoutes.post(
   checkAuth(...Object.values(Role)),
   AuthControllers.setPassword
 );
-//Frontend->forget password->email->user state check -> short expiration token(valid for 10 min)
-// ->email->frontend link http://localhost:5173/reset-password?email=adib@gmail.com&token=token
-//Backend-> extract email and token from query->take new password from user->reset-password api
-// -> authorization = token->new password->token verify-> password hash ->save user password
+
+// [Frontend] POST /forgot-password → verify user → generate 10min token → send email with reset link → user clicks link → [Frontend] GET /reset-password?email&token → (optional) verify token → [Frontend] POST /reset-password with email, token, newPassword → [Backend] verify token → hash password → update user → respond success
+
 AuthRoutes.post("/forgot-password", AuthControllers.forgotPassword);
 AuthRoutes.post(
   "/reset-password",

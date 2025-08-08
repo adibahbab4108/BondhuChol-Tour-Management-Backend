@@ -11,7 +11,7 @@ import bcrypt from "bcryptjs";
 
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password, ...rest } = payload;
-  console.log(payload);
+  
   const isUserExists = await User.findOne({ email });
 
   if (isUserExists) {

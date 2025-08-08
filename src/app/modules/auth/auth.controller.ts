@@ -26,7 +26,7 @@ const credentialsLogin = catchAsync(
     // //   secure: false,
     // // });
 
-    // setAuthCookie(res, loginInfo);
+    //Or setAuthCookie(res, loginInfo);
 
     // sendResponse(res, {
     //   statusCode: 200,

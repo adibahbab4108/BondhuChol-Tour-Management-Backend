@@ -1,15 +1,19 @@
 /* eslint-disable no-console */
 import AppError from "../../errorHelpers/AppError";
+import { generatePdf, IInvoiceData } from "../../utils/invoice";
+import { sendEmail } from "../../utils/sendEmail";
 import { BOOKING_STATUS } from "../booking/booking.interface";
 import { Booking } from "../booking/booking.model";
 import { ISSLCommerz } from "../sslCommerz/sslCommerz.interface";
 import { SSLService } from "../sslCommerz/sslCommerz.service";
+import { ITour } from "../tour/tour.interface";
+import { IUser } from "../user/user.interface";
 import { PAYMENT_STATUS } from "./payment.interface";
 import { Payment } from "./payment.model";
 
 const initPayment = async (bookingId: string) => {
   const payment = await Payment.findOne({ booking: bookingId });
-console.log(payment)
+  console.log(payment);
   if (!payment)
     throw new AppError(
       "Payment Not Found. You have not booked this tour.",
@@ -32,11 +36,11 @@ console.log(payment)
     transactionId: payment.transactionId,
   };
 
-  const sslPayment = await SSLService.sslPaymentInit(sslPayload)
+  const sslPayment = await SSLService.sslPaymentInit(sslPayload);
 
   return {
-    paymentUrl: sslPayment.GatewayPageURL
-  }
+    paymentUrl: sslPayment.GatewayPageURL,
+  };
 };
 const successPayment = async (query: Record<string, string>) => {
   //update booking (confirm)
@@ -54,8 +58,11 @@ const successPayment = async (query: Record<string, string>) => {
         session: session,
       }
     );
+    if (!updatedPayment) {
+      throw new AppError("Payment not found", 404);
+    }
 
-    await Booking.findByIdAndUpdate(
+    const updateBooking = await Booking.findByIdAndUpdate(
       { _id: updatedPayment?.booking },
       {
         status: BOOKING_STATUS.COMPLETE,
@@ -65,7 +72,38 @@ const successPayment = async (query: Record<string, string>) => {
         runValidators: true,
         session: session,
       }
-    );
+    )
+      .populate("tour", "title")
+      .populate("user", "name email");
+    if (!updateBooking) {
+      throw new AppError("Booking not found", 404);
+    }
+
+    const invoiceData: IInvoiceData = {
+      bookingDate: updateBooking.createdAt as Date,
+      guestCount: updateBooking.guestCount,
+      totalAmount: updatedPayment.amount,
+      tourTitle: (updateBooking.tour as unknown as ITour).title,
+      treansactionId: updatedPayment.transactionId,
+      userName: (updateBooking.user as unknown as IUser).name,
+    };
+
+    const pdfBuffer = await generatePdf(invoiceData);
+
+    await sendEmail({
+      to: (updateBooking.user as unknown as IUser).email,
+      subject: "Your Booking Invoice",
+      templateName: "invoice",
+      templateData:invoiceData,
+      attachments: [
+        {
+          filename: `invoice-${invoiceData.treansactionId}.pdf`,
+          content: pdfBuffer,
+          contentType: "application/pdf",
+        },
+      ],
+    })
+
 
     await session.commitTransaction();
     session.endSession();
@@ -162,5 +200,5 @@ export const PaymentService = {
   successPayment,
   failPayment,
   cancelPayment,
-  initPayment
+  initPayment,
 };

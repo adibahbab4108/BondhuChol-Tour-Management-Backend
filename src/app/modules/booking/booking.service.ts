@@ -19,9 +19,9 @@ const createBooking = async (payload: Partial<IBooking>, userId: string) => {
   const transactionId = getTransactionId();
 
   const session = await Booking.startSession();
-  session.startTransaction();
-
+  
   try {
+    session.startTransaction();
     const user = await User.findById(userId);
 
     if (!user?.phone || !user.address) {

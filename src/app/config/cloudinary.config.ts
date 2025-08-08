@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 //Frontend-> form data with image file->Multer-> Form data-> req(body+file)
 
 import { v2 as cloudinary } from "cloudinary";

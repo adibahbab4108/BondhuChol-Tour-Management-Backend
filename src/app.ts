@@ -13,28 +13,42 @@ import "./app/config/passport"
 
 const app = express();
 
+// Parses cookies and adds them to req.cookies
 app.use(cookieParser())
-app.use(express.json());
-app.use(express.urlencoded({extended:true}))// for handling form data
-app.use(cors());
 
+// Parses incoming JSON requests and makes the data available in req.body
+app.use(express.json());
+
+// Parses URL-encoded form data (useful for forms submitted via POST)
+app.use(express.urlencoded({extended:true}))
+
+// Enables cross-origin requests from client (frontend), allows credentials (cookies, headers) to be sent
+app.use(cors({ origin: true, credentials: true }));
+
+// Configures and initializes session support for persistent login sessions
 app.use(expressSession({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false,
+  secret: 'secret',  // Secret key to sign session ID cookies (should be from env in production)
+  resave: false,  // Avoids resaving session if nothing has changed
+  saveUninitialized: false,  // Doesn't save empty sessions
 }))
+
+// Initializes Passport for authentication middleware
 app.use(passport.initialize())
+// Connects Passport with the session for persistent login (serialization/deserialization)
 app.use(passport.session())
 
+// Mounts all application routes under /api/v1
 app.use("/api/v1", router);
 
-// Global error handler
-app.use(globalErrorHandler);
 
-app.use(notFound);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to BondhuChol Tour Management System!");
 });
+
+// Handles application-wide errors (after route handling)
+app.use(globalErrorHandler);
+// Handles unmatched routes (404 Not Found)
+app.use(notFound);
 
 export default app;
