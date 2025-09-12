@@ -15,6 +15,7 @@ TourRoutes.get("/tour-types", TourController.getAllTourTypes);
 TourRoutes.post(
     "/create-tour-type",
     checkAuth(Role.ADMIN, Role.SUPER_ADMIN),
+    multerUpload.array("files"),
     validateRequest(createTourTypeZodSchema),
     TourController.createTourType
 );
