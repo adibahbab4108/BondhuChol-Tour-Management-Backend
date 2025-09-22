@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { uploadBufferToCloudinary } from "../../config/cloudinary.config";
 import AppError from "../../errorHelpers/AppError";
 import { generatePdf, IInvoiceData } from "../../utils/invoice";
 import { sendEmail } from "../../utils/sendEmail";
@@ -75,6 +76,7 @@ const successPayment = async (query: Record<string, string>) => {
     )
       .populate("tour", "title")
       .populate("user", "name email");
+
     if (!updateBooking) {
       throw new AppError("Booking not found", 404);
     }
@@ -90,11 +92,26 @@ const successPayment = async (query: Record<string, string>) => {
 
     const pdfBuffer = await generatePdf(invoiceData);
 
+    const cloudinaryResult = await uploadBufferToCloudinary(
+      pdfBuffer,
+      "invoice"
+    );
+
+    if (!cloudinaryResult) {
+      throw new AppError("Error uploading pdf", 401);
+    }
+
+    await Payment.findByIdAndUpdate(
+      updatedPayment._id,
+      { invoiceUrl: cloudinaryResult.secure_url },
+      { runValidators: true, session }
+    );
+
     await sendEmail({
       to: (updateBooking.user as unknown as IUser).email,
       subject: "Your Booking Invoice",
       templateName: "invoice",
-      templateData:invoiceData,
+      templateData: invoiceData,
       attachments: [
         {
           filename: `invoice-${invoiceData.treansactionId}.pdf`,
@@ -102,8 +119,7 @@ const successPayment = async (query: Record<string, string>) => {
           contentType: "application/pdf",
         },
       ],
-    })
-
+    });
 
     await session.commitTransaction();
     session.endSession();
@@ -114,6 +130,9 @@ const successPayment = async (query: Record<string, string>) => {
   } catch (error) {
     console.log(error);
     session.abortTransaction();
+
+    // throw new AppError(httpStatus.BAD_REQUEST, error) ❌❌
+    throw error;
   }
 };
 const failPayment = async (query: Record<string, string>) => {
@@ -196,9 +215,24 @@ const cancelPayment = async (query: Record<string, string>) => {
   }
 };
 
+const getInvoiceDownloadUrl = async (paymentId: string) => {
+  const payment = await Payment.findById(paymentId).select("invoiceUrl");
+
+  if (!payment) {
+    throw new AppError("Payment not found", 401);
+  }
+
+  if (!payment.invoiceUrl) {
+    throw new AppError("No invoice found", 401);
+  }
+
+  return payment.invoiceUrl;
+};
+
 export const PaymentService = {
   successPayment,
   failPayment,
   cancelPayment,
   initPayment,
+  getInvoiceDownloadUrl,
 };

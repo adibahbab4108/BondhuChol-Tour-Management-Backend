@@ -19,5 +19,4 @@ export const setAuthCookie = (res: Response, tokenInfo: AuthToken) => {
       secure: true,
     });
   }
-
 };

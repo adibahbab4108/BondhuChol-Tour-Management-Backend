@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 //Frontend-> form data with image file->Multer-> Form data-> req(body+file)
 
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { envVar } from "./env.config";
 import AppError from "../errorHelpers/AppError";
 
@@ -14,7 +14,7 @@ cloudinary.config({
 export const uploadBufferToCloudinary = async (
   buffer: Buffer,
   fileName: string
-) => {
+):Promise<UploadApiResponse | undefined> => {
   try {
     return new Promise((resolve, reject) => {
       const public_id = `BondhuCholPDF/${fileName}-${Date.now()}`;
@@ -26,7 +26,7 @@ export const uploadBufferToCloudinary = async (
               console.log("Cloudinary Upload Error:", error);
               reject(new AppError("Cloudinary image upload failed", 500));
             } else {
-              resolve(result?.secure_url);
+              resolve(result);
             }
           }
         )
