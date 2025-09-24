@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Types } from "mongoose";
+import { Date, Types } from "mongoose";
 
 export enum Role {
   SUPER_ADMIN = "SUPER_ADMIN",
@@ -36,4 +36,5 @@ export interface IUser {
   role: Role;
   bookings?: Types.ObjectId[];
   guides?: Types.ObjectId[];
+  createdAt?: Date
 }
