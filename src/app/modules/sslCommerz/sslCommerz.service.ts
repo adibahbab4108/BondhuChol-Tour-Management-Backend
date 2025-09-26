@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { envVar } from "../../config/env.config";
 import AppError from "../../errorHelpers/AppError";
+import { Payment } from "../payment/payment.model";
 import { ISSLCommerz } from "./sslCommerz.interface";
 import axios from "axios";
 const sslPaymentInit = async (payload: ISSLCommerz) => {
@@ -14,6 +15,7 @@ const sslPaymentInit = async (payload: ISSLCommerz) => {
       success_url: `${envVar.SSL_SUCCESS_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=success`,
       fail_url: `${envVar.SSL_FAIL_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=fail`,
       cancel_url: `${envVar.SSL_CANCEL_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=cancel`,
+      ipn_url:envVar.SSL_IPN_URL,
       shipping_method: "N/A",
       product_name: "Tour",
       product_category: "service",
@@ -30,6 +32,7 @@ const sslPaymentInit = async (payload: ISSLCommerz) => {
       cus_fax: "N/A",
       cus_note: "N/A",
     };
+
     const response = await axios({
       method: "POST",
       url: envVar.SSL_PAYMENT_API,
@@ -44,6 +47,26 @@ const sslPaymentInit = async (payload: ISSLCommerz) => {
   }
 };
 
+const validatePayment = async (payload: any) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${envVar.SSL_VALIDATION_API}?val_id=${payload.val_id}&store_id=${envVar.SSL_STORE_ID}&store_passwd=${envVar.SSL_STORE_PASS}`,
+    });
+
+    console.log("SSLCommerz validate api response",response);
+
+    await Payment.updateOne(
+      { transactionId: payload.tran_id },
+      { paymentGatewayData: response.data },
+      { runValidators: true }
+    );
+  } catch (error: any) {
+    console.log(error);
+    throw new AppError(`Payment Validation Error, ${error?.message}`, 401);
+  }
+};
 export const SSLService = {
   sslPaymentInit,
+  validatePayment,
 };

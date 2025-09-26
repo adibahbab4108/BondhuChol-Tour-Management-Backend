@@ -10,5 +10,5 @@ PaymentRoutes.post("/success", PaymentController.successPayment);
 PaymentRoutes.post("/fail", PaymentController.failPayment);
 PaymentRoutes.post("/cancel", PaymentController.cancelPayment);
 PaymentRoutes.get("/invoice/:paymentId", checkAuth(...Object.values(Role)), PaymentController.getInvoiceDownloadUrl);
-
+PaymentRoutes.post("/validate-payment")
 export default PaymentRoutes;
