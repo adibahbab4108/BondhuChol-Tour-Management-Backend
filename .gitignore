@@ -21,3 +21,4 @@ lerna-debug.log*
 
 # IDE/editor settings
 .vscode/
+.vercel
