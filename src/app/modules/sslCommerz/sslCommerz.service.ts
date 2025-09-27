@@ -15,7 +15,7 @@ const sslPaymentInit = async (payload: ISSLCommerz) => {
       success_url: `${envVar.SSL_SUCCESS_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=success`,
       fail_url: `${envVar.SSL_FAIL_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=fail`,
       cancel_url: `${envVar.SSL_CANCEL_BACKEND_URL}?transactionId=${payload.transactionId}&amount=${payload.amount}&status=cancel`,
-      ipn_url:envVar.SSL_IPN_URL,
+      ipn_url: envVar.SSL_IPN_URL,
       shipping_method: "N/A",
       product_name: "Tour",
       product_category: "service",
@@ -54,7 +54,7 @@ const validatePayment = async (payload: any) => {
       url: `${envVar.SSL_VALIDATION_API}?val_id=${payload.val_id}&store_id=${envVar.SSL_STORE_ID}&store_passwd=${envVar.SSL_STORE_PASS}`,
     });
 
-    console.log("SSLCommerz validate api response",response);
+    console.log("SSLCommerz validate api response", response);
 
     await Payment.updateOne(
       { transactionId: payload.tran_id },
