@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "d04b0426-c267-49d9-94aa-3d4025de7fcc",
+		"name": "BondhuChol Tour Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44257919",
+		"_collection_link": "https://adibahbab.postman.co/workspace/Adib-Ahbab's-Workspace~76f5217f-daca-45c7-89fb-aff61d7649ad/collection/44257919-d04b0426-c267-49d9-94aa-3d4025de7fcc?action=share&source=collection_link&creator=44257919"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Adib Real\",\r\n    \"email\":\"3adibahbab@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc0MDk2ZTBhMDg0MTIxZmZkNzA5MjkiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MjQzNTYxMSwiZXhwIjoxNzUyNTIyMDExfQ.3b8uBZdr9xeZaGgyYKmdHh9rGVLcIH08PTz9cg9zRDw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Adib Ahbab\",\r\n    \"email\":\"Adib@gmail.com\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/user/all-users"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzEyNTE1MSwiZXhwIjoxNzUzMjExNTUxfQ.OgdxjrcR5K9CGHncT4RPW2JE5WUgg9ZJGIpxKMrDYrk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"01927147085\",\r\n    \"address\":\"Khlushi, Chattogram\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/user/68755b212af309a02c120f58"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzQ2ODQ3NiwiZXhwIjoxNzUzNTU0ODc2fQ.jhvRCPxiLVV1TK6WbWPGFOg4puwhrQxkJW5Ki8sPU2U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"super@gmail.com\",\r\n    \"password\":\"super1234\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/user/68755b212af309a02c120f58"
+					},
+					"response": []
+				},
+				{
+					"name": "My Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzQ2ODQ3NiwiZXhwIjoxNzUzNTU0ODc2fQ.jhvRCPxiLVV1TK6WbWPGFOg4puwhrQxkJW5Ki8sPU2U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"super@gmail.com\",\r\n    \"password\":\"super1234\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/user/me"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzQ2ODQ3NiwiZXhwIjoxNzUzNTU0ODc2fQ.jhvRCPxiLVV1TK6WbWPGFOg4puwhrQxkJW5Ki8sPU2U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"super.admin@gmail.com\",\r\n    \"password\":\"super.admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "New Access Token / Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Adib Ahbab\",\r\n    \"email\":\"Adib1@gmail.com\",\r\n    \"password\": \"Adib@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/auth/refresh-token"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODczYzY2YzJkYWVjZjdmNzlmZjIwYTIiLCJlbWFpbCI6IkFkaWJAZ21haWwuY29tIiwiaWF0IjoxNzUyNDI2Mzc2LCJleHAiOjE3NTI1MTI3NzZ9.29gLPR0KreOE1KKTONTzdXM7SFZTneBeVcu4iD7oyqw",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"super@gmail.com\",\r\n    \"password\":\"super1234\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzU1NzE4NSwiZXhwIjoxNzUzNTU3Nzg1fQ.pSAY7qUYPpyHGPmwllL4YTnPbIZnwG50xynmZmutvnc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6877f984cb9219a64393da51\",\r\n    \"newPassword\":\"super123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/auth/reset-password"
+					},
+					"response": []
+				},
+				{
+					"name": "Set Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzQ2ODQ3NiwiZXhwIjoxNzUzNTU0ODc2fQ.jhvRCPxiLVV1TK6WbWPGFOg4puwhrQxkJW5Ki8sPU2U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"Adib@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/auth/set-password"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc3Zjk4NGNiOTIxOWE2NDM5M2RhNTEiLCJlbWFpbCI6ImFkaWIuYWJjMjAyMkBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc1MzQ2ODQ3NiwiZXhwIjoxNzUzNTU0ODc2fQ.jhvRCPxiLVV1TK6WbWPGFOg4puwhrQxkJW5Ki8sPU2U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"adib.abc2022@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/auth/forgot-password"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Division",
+			"item": [
+				{
+					"name": "Create Division",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzMzNjYyNywiZXhwIjoxNzUzNDIzMDI3fQ.qIf-UyxBGGFbHNG9zy25mxqphh5Oat096bkA_rueHqA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n  \"name\": \"New Chattogram\",\n  \"thumbnail\": \"https://example.com/images/sylhet.jpg\",\n  \"description\": \"A visual journey through the tea gardens, mystic hills, and spiritual landmarks of Sylhet.\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": "http://localhost:5000/api/v1/division/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Division",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1Mjg2NzM0NywiZXhwIjoxNzUyOTUzNzQ3fQ.K4uL_6SnUu4WQdfnY4lJdC831JTnzsrvbr74ALTzzEA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Chattogram\",\r\n  \"thumbnail\": \"https://example.com/images/chattogram.jpg\",\r\n  \"description\": \"A curated collection showcasing the rich cultural and architectural history of Chattogram.\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/division"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Division",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5000/api/v1/division/dhaka-division"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Division",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzMzNjYyNywiZXhwIjoxNzUzNDIzMDI3fQ.qIf-UyxBGGFbHNG9zy25mxqphh5Oat096bkA_rueHqA",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/adiba/Downloads/1740546325330.jpeg"
+								}
+							]
+						},
+						"url": "http://localhost:5000/api/v1/division/687b212dab077ae2ad914474"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tour",
+			"item": [
+				{
+					"name": "Create Tour Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODlhMTA0ODNiOGVlYmY4ZDYwZDg3OTAiLCJlbWFpbCI6InN1cGVyLmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NTI4NDMwMiwiZXhwIjoxNzU1MzcwNzAyfQ.L5FpSbi-ChUhlJ9Jnizk3Cy4vOv2pXss_Zp5CV0vMSE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Awsome Variary\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/tour/create-tour-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All tour types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/tour/tour-types?limit=2&page=1&fields=_id,name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tour",
+								"tour-types"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "fields",
+									"value": "_id,name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tour Type",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzMzNjYyNywiZXhwIjoxNzUzNDIzMDI3fQ.qIf-UyxBGGFbHNG9zy25mxqphh5Oat096bkA_rueHqA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Nature and wildlife travel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/tour/tour-types/687b2db1d2590538fe27da17"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tour Type",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODlhMTA0ODNiOGVlYmY4ZDYwZDg3OTAiLCJlbWFpbCI6InN1cGVyLmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NTE5NDM1NSwiZXhwIjoxNzU1MjgwNzU1fQ.sSSzLaKk6ksqlyWeBCmGLdmAPUE-7mEbSGliwprUC9Q",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5000/api/v1/tour/tour-types/689af411d3bb9802cc6563b3"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tour",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/tour",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tour"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Chattogram",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "landmarks",
+									"disabled": true
+								},
+								{
+									"key": "searchTerm",
+									"value": "landmarks",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "-title,-location",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tour",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzQyMzc0NiwiZXhwIjoxNzUzNTEwMTQ2fQ.MsOm1dvHaq5cAxZMABX4OACX1qo2nWeRbRmKTAlgGWQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n  \"title\": \"New Lajek Valley Adventure Tour\",\n  \"description\": \"Experience the serene beauty of Sajek Valley with guided treks and breathtaking viewpoints nestled in the hills. Discover indigenous culture, enjoy fresh mountain cuisine, and unwind amidst cloud-kissed landscapes on this unforgettable journey.\",\n  \"division\": \"6881dde2c20be154f861be78\",\n  \"tourType\": \"687b2de6d2590538fe27da21\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/adiba/Downloads/Untitled-3639.jpg",
+										"/C:/Users/adiba/Downloads/43328093514_923173b675_h.jpg"
+									]
+								}
+							]
+						},
+						"url": "http://localhost:5000/api/v1/tour/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Tour",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5000/api/v1/tour/687c91ab6cf92efdf26640db"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tour",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzQyMzc0NiwiZXhwIjoxNzUzNTEwMTQ2fQ.MsOm1dvHaq5cAxZMABX4OACX1qo2nWeRbRmKTAlgGWQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n  \"title\": \"Old but New Dhaka Heritage Walk\",\n  \"description\": \"Explore the cultural and historical landmarks of Old Dhaka with expert local guides.\"\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/adiba/Downloads/ctg2.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://localhost:5000/api/v1/tour/687c91ab6cf92efdf26640db"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODlhMTA0ODNiOGVlYmY4ZDYwZDg3OTAiLCJlbWFpbCI6InN1cGVyLmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzY5NDcyOSwiZXhwIjoxNzU3NzgxMTI5fQ.fNVLDZyb9c8hreEvofFqZWyHcv3hrFZsD0zIaWOg-fM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tour\":\"687e458db146febb0728d55e\",\r\n    \"guestCount\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Booking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODlhMTA0ODNiOGVlYmY4ZDYwZDg3OTAiLCJlbWFpbCI6InN1cGVyLmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzY5MDMzNywiZXhwIjoxNzU3NjkwMzQyfQ.cKmTulFN8jmxHY_ReqeVRdSi8CoQFxITNRr04FPQv_M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tour\":\"687bef0923793955c86fa5e3\",\r\n    \"guestCount\":2\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/booking"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Payment for a booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1NWIyMTJhZjMwOWEwMmMxMjBmNTgiLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1MzEyNTE1MSwiZXhwIjoxNzUzMjExNTUxfQ.OgdxjrcR5K9CGHncT4RPW2JE5WUgg9ZJGIpxKMrDYrk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tour\":\"687bef0923793955c86fa5e3\",\r\n    \"guestCount\":2\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/payment/init-payment/6880aa69aa76a825fa5e6cff"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invoice download URL",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OTP",
+			"item": [
+				{
+					"name": "Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"adib.abc2022@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/otp/send"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"adib.abc2022@gmail.com\",\r\n    \"otp\":\"601313\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/otp/verify"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"item": [
+				{
+					"name": "User Stats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Tour Stats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Booking Stats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Stats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": ""
+		}
+	]
+}

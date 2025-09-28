@@ -1,8 +1,12 @@
+// workflow of backend: Run->connectRedis->startServer->connect mongoose->start Express server->Create Super Admin->Route+middleware->controller->process handler
+
 /* eslint-disable no-console */
 import mongoose from "mongoose";
 import app from "./app";
 import { Server } from "http";
 import { envVar } from "./app/config/env.config";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
+import { connectRedis } from "./app/config/redis.config";
 
 let server: Server;
 
@@ -24,9 +28,14 @@ const startServer = async () => {
     process.exit(1); // Exit the process with a failure code
   }
 };
-startServer();
 
-// Handle unhandled promise rejections and uncaught exceptions
+(async () => {
+  await connectRedis();
+  await startServer();
+  await seedSuperAdmin();
+})();
+
+// Handle unhandled promise rejections for async errors
 // This is important for production applications to avoid crashes
 process.on("unhandledRejection", (error) => {
   console.error("Unhandled Rejection:", error);
@@ -40,6 +49,7 @@ process.on("unhandledRejection", (error) => {
 });
 // Promise.reject(new Error("Unhandled Rejection detected"));
 
+// Handle uncaught exceptions for sync errors
 process.on("uncaughtException", (error) => {
   console.error("Uncaught Exception:", error);
   // process.exit(1);

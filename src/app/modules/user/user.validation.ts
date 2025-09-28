@@ -14,10 +14,11 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/, {
       message:
         "Password must contain letters, numbers, and a special character (@$!%*?&)",
-    }).optional(),
+    })
+    .optional(),
   phone: z
     .string()
-    .regex(/^\+8801[3-9]\d{8}$/, {
+    .regex(/^01[3-9]\d{8}$/, {
       message:
         "Phone number must be a valid Bangladeshi number (e.g. 01XXXXXXXXX)",
     })
@@ -26,6 +27,10 @@ export const createUserZodSchema = z.object({
     .string()
     .min(3, { message: "Address must be provided" })
     .optional(),
+
+  //will remove later
+  isActive: z.enum(Object.values(isActive) as [string]).optional(),
+  isDeleted: z.boolean().optional(),
 });
 export const updateUserZodSchema = z.object({
   name: z
@@ -42,13 +47,13 @@ export const updateUserZodSchema = z.object({
         "Password must contain letters, numbers, and a special character (@$!%*?&)",
     })
     .optional(),
-  role: z.enum(Object.values(Role) as [string]),
+  role: z.enum(Object.values(Role) as [string]).optional(),
   isActive: z.enum(Object.values(isActive) as [string]).optional(),
   isDeleted: z.boolean().optional(),
   isVerified: z.boolean().optional(),
   phone: z
     .string()
-    .regex(/^\+8801[3-9]\d{8}$/, {
+    .regex(/^01[3-9]\d{8}$/, {
       message:
         "Phone number must be a valid Bangladeshi number (e.g. 01XXXXXXXXX)",
     })

@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { PaymentController } from "./payment.controller";
+import { checkAuth } from "../../middleware/checkAuth";
+import { Role } from "../user/user.interface";
+
+const PaymentRoutes = Router();
+
+PaymentRoutes.post("/init-payment/:bookingId", PaymentController.initPayment);
+PaymentRoutes.post("/success", PaymentController.successPayment);
+PaymentRoutes.post("/fail", PaymentController.failPayment);
+PaymentRoutes.post("/cancel", PaymentController.cancelPayment);
+PaymentRoutes.get("/invoice/:paymentId", checkAuth(...Object.values(Role)), PaymentController.getInvoiceDownloadUrl);
+PaymentRoutes.post("/validate-payment",PaymentController.validatePayment)
+export default PaymentRoutes;

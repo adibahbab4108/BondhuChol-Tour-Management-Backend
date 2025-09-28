@@ -1,4 +1,5 @@
-import { Types } from "mongoose";
+/* eslint-disable no-unused-vars */
+import { Date, Types } from "mongoose";
 
 export enum Role {
   SUPER_ADMIN = "SUPER_ADMIN",
@@ -8,7 +9,7 @@ export enum Role {
 }
 
 export interface IAuth {
-  provider: "goole" | "credentials";
+  provider: "google" | "credentials";
   providerId: string;
 }
 
@@ -20,6 +21,7 @@ export enum isActive {
 }
 
 export interface IUser {
+  _id?:Types.ObjectId
   name: string;
   email: string;
   password?: string;
@@ -34,4 +36,5 @@ export interface IUser {
   role: Role;
   bookings?: Types.ObjectId[];
   guides?: Types.ObjectId[];
+  createdAt?: Date
 }
