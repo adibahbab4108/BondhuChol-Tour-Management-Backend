@@ -1,174 +1,45 @@
-Perfect 👍 Now that you’ve shared your **dependencies list**, I’ll update the `README.md` **Features section** so it reflects the actual tech stack and capabilities supported by your backend.
+npm run dev```
 
-Here’s the **improved README.md** 👇
-
----
-
-```markdown
-# BondhuChol Tour Management System (Backend)
-
-This is the backend service for **BondhuChol Tour Management System**, built with Node.js, Express, and MongoDB.  
-It provides RESTful APIs for managing tours, bookings, users, authentication, payments, and more.  
-
-🚀 The backend is deployed at:  
-**[https://bondhucoltmsbackend.vercel.app](https://bondhucoltmsbackend.vercel.app)**
-
----
-
-## 📌 Features
-
-- **Authentication & Authorization**
-  - JWT-based authentication
-  - Local strategy authentication with Passport.js
-  - Google OAuth 2.0 login
-  - Role-based access control (Admin, User, etc.)
-
-- **Tour & Booking Management**
-  - CRUD operations for tours
-  - Booking creation & management
-  - File/image uploads for tours using **Multer + Cloudinary**
-
-- **User Management**
-  - Secure password hashing with **bcryptjs**
-  - Session management with **express-session** & cookies
-  - Input validation with **Zod**
-
-- **Payment & Documents**
-  - Payment integration-ready (SSLCommerz / Stripe can be added)
-  - PDF generation for invoices & tickets with **PDFKit**
-
-- **Email & Notifications**
-  - Email sending with **Nodemailer**
-  - Redis caching for session/token management
-
-- **Other Utilities**
-  - API testing with Postman (`BondhuChol Tour Management.json`)
-  - CORS enabled for frontend integration
-  - Axios for external API calls
-  - EJS template engine support for server-side rendering (optional)
-
----
-
-## 📂 Repository Structure
-```
-
-├── controllers/       # Business logic
-├── models/            # Database models
-├── routes/            # API routes
-├── middleware/        # Authentication & validation
-├── utils/             # Helper functions (cloudinary, pdf, etc.)
-├── BondhuChol Tour Management.json  # Postman API collection
-└── README.md
-
-````
-
----
-
-## ⚙️ Getting Started
-
-### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/your-username/BondhuChol-TMS-Backend.git
-cd BondhuChol-TMS-Backend
-````
-
-### 2️⃣ Install Dependencies
-
-```bash
-npm install
-```
-
-### 3️⃣ Setup Environment Variables
-
-Create a `.env` file in the root directory and configure it:
-
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-SESSION_SECRET=your_session_secret
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-REDIS_URL=your_redis_url
-EMAIL_USER=your_email_address
-EMAIL_PASS=your_email_password
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-```
-
-### 4️⃣ Run Locally
-
-```bash
-npm run dev
-```
-
-Server will start at `http://localhost:5000`
+The server will start and listen for requests at `http://localhost:5000`.
 
 ---
 
 ## 🧪 API Testing with Postman
 
-1. Import the file **`BondhuChol Tour Management.json`** into Postman.
+A complete Postman collection is included to make API testing simple and efficient.
 
-   * Open Postman → Import → Upload the JSON file.
-2. All endpoints will be available in a collection named **BondhuChol Tour Management**.
-3. Update the base URL in Postman to:
+### Steps to Import and Use
 
-   ```
-   https://bondhucoltmsbackend.vercel.app
-   ```
-4. Run the requests and test APIs directly.
+1.  **Open Postman**
+    *   If you don't have it, download and install [Postman](https://www.postman.com/downloads/).
 
----
+2.  **Import the Collection**
+    *   In Postman, click on **Import** in the top-left corner.
+    *   Drag and drop or select the `BondhuChol Tour Management.json` file from this repository.
+    *   A new collection named **BondhuChol Tour Management** will be created in your workspace.
 
-## 🌐 Live API Base URL
+3.  **Set the Base URL Variable**
+    *   Right-click the imported collection and select **Edit**.
+    *   Go to the **Variables** tab.
+    *   Set the `baseUrl` variable to the deployed API endpoint:
+        ```
+        https://bondhucoltmsbackend.vercel.app
+        ```
+    *   *For local testing, you can set it to `http://localhost:5000`.*
 
-```
-https://bondhucoltmsbackend.vercel.app
-```
-
-Example endpoints:
-
-* `GET /api/v1/tours` → Fetch all tours
-* `POST /api/v1/bookings` → Create a booking
-* `POST /api/v1/auth/login` → User login
-* `POST /api/v1/auth/google` → Google OAuth login
-
----
-
-## 🧪 API Testing with Postman
-
-You can test all backend APIs using the provided Postman collection file:  
-**`BondhuChol Tour Management.json`**
-
-### 🔹 Steps to Import and Use
-
-1. **Open Postman**  
-   - Download & install [Postman](https://www.postman.com/downloads/) if you don’t already have it.
-
-2. **Import the Collection**  
-   - In Postman, click on **Import** (top left).  
-   - Select the file **`BondhuChol Tour Management.json`** from the repository.  
-   - A new collection named **BondhuChol Tour Management** will appear in your Postman sidebar.
-
-3. **Set the Base URL**  
-   - Open the collection and click on the **Variables** tab.  
-   - Set the variable `baseUrl` to the deployed API:  
-     ```
-     https://bondhucoltmsbackend.vercel.app
-     ```
-   - This way, all requests will automatically use the correct backend URL.
-
-4. **Run the Endpoints**  
-   - Expand the collection and choose any endpoint (e.g., `GET /api/v1/tours`).  
-   - Click **Send** to make a request.  
-   - You should see a JSON response from the live server.
-
-5. **(Optional) Run All Tests at Once**  
-   - Click on the collection → **Run Collection**.  
-   - This will execute all API requests sequentially and show results.
+4.  **Send Requests**
+    *   Expand the collection and click on any endpoint (e.g., `GET /api/v1/tours`).
+    *   Click **Send** to see the JSON response from the live server.
 
 ---
 
-✅ That’s it! Now you can easily test all APIs (authentication, tours, bookings, etc.) directly in Postman.
+## 🌐 Live API Endpoints
+
+The base URL for all API endpoints is: `https://bondhucoltmsbackend.vercel.app`
+
+### Example Endpoints:
+
+*   `GET /api/v1/tours` - Fetch all available tours.
+*   `POST /api/v1/bookings` - Create a new booking (requires authentication).
+*   `POST /api/v1/auth/login` - Log in a user and receive a JWT.
+*   `GET /api/v1/auth/google` - Initiate the Google OAuth 2.0 login flow.
