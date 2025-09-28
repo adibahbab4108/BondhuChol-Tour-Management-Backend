@@ -137,3 +137,38 @@ Example endpoints:
 
 ---
 
+## 🧪 API Testing with Postman
+
+You can test all backend APIs using the provided Postman collection file:  
+**`BondhuChol Tour Management.json`**
+
+### 🔹 Steps to Import and Use
+
+1. **Open Postman**  
+   - Download & install [Postman](https://www.postman.com/downloads/) if you don’t already have it.
+
+2. **Import the Collection**  
+   - In Postman, click on **Import** (top left).  
+   - Select the file **`BondhuChol Tour Management.json`** from the repository.  
+   - A new collection named **BondhuChol Tour Management** will appear in your Postman sidebar.
+
+3. **Set the Base URL**  
+   - Open the collection and click on the **Variables** tab.  
+   - Set the variable `baseUrl` to the deployed API:  
+     ```
+     https://bondhucoltmsbackend.vercel.app
+     ```
+   - This way, all requests will automatically use the correct backend URL.
+
+4. **Run the Endpoints**  
+   - Expand the collection and choose any endpoint (e.g., `GET /api/v1/tours`).  
+   - Click **Send** to make a request.  
+   - You should see a JSON response from the live server.
+
+5. **(Optional) Run All Tests at Once**  
+   - Click on the collection → **Run Collection**.  
+   - This will execute all API requests sequentially and show results.
+
+---
+
+✅ That’s it! Now you can easily test all APIs (authentication, tours, bookings, etc.) directly in Postman.
